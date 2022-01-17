@@ -1,24 +1,18 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
+
+import fetchData from './data';
+import Tree from './components/Tree';
 import './App.css';
 
 function App() {
+  const [ data, setData ] = useState([]);
+
+  useEffect(() => {
+    fetchData().then(result => setData(result));
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Tree data={data} />
   );
 }
 
